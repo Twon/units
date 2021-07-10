@@ -4,15 +4,18 @@
 <html lang="en" >
 <head>
   <meta charset="utf-8">
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Release notes &mdash; mp-units 0.6.0 documentation</title>
+  <title>Release notes &mdash; mp-units 0.8.0 documentation</title>
   
 
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
   <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
 
@@ -28,17 +31,17 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="References" href="references.html" />
     <link rel="prev" title="Index" href="genindex.html" /> 
 </head>
 
@@ -63,7 +66,7 @@
             
             
               <div class="version">
-                0.6.0
+                0.8.0
               </div>
             
           
@@ -92,18 +95,17 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
-<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="framework.html">Framework Basics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="use_cases.html">Use Cases</a></li>
 <li class="toctree-l1"><a class="reference internal" href="design.html">Design Deep Dive</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Installation And Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Reference:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="reference/core.html">Core Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reference/systems.html">Systems</a></li>
-<li class="toctree-l1"><a class="reference internal" href="reference/math.html">Math</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reference/random.html">Random</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Appendix:</span></p>
@@ -111,6 +113,7 @@
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
 <li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 </ul>
 
             
@@ -176,24 +179,97 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="release-notes">
+  <section id="release-notes">
 <h1>Release notes<a class="headerlink" href="#release-notes" title="Permalink to this headline">¶</a></h1>
 <ul>
-<li><p><strong>0.6.0 WIP</strong></p>
+<li><p><strong>0.8.0 WIP</strong></p>
 <ul class="simple">
-<li><p>linear_algebra updated to 0.7.0/testing</p></li>
-<li><p>fmt updated to 7.0.3</p></li>
-<li><p>range-v3 updated to 0.11.0</p></li>
-<li><p>catch2 updated to 2.13.0</p></li>
-<li><p>doxygen updated to 1.8.18</p></li>
-<li><p>ms-gsl 3.1.0 dependency added</p></li>
-<li><p>Added angle as SI base dimension (thanks <a class="reference external" href="https://github.com/kwikius">&#64;kwikius</a>)</p></li>
-<li><p>Added STL random number distribution wrappers (thanks <a class="reference external" href="https://github.com/yasamoka">&#64;yasamoka</a>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">math.h</span></code> function signatures refactored to use a <code class="docutils literal notranslate"><span class="pre">Quantity</span></code> concept (thanks <a class="reference external" href="https://github.com/kwikius">&#64;kwikius</a>)</p></li>
-<li><p>FPS system added (thanks <a class="reference external" href="https://github.com/mikeford3">&#64;mikeford3</a>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">quantity_point</span></code> support added (thanks <a class="reference external" href="https://github.com/johelegp">&#64;johelegp</a>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ratio</span></code> changed to the NTTP kind</p></li>
-<li><p>Minimum compiler version supported changed to gcc-9.3</p></li>
+<li><p>(!) fix: add <code class="docutils literal notranslate"><span class="pre">quantity_point::origin</span></code>, like <code class="docutils literal notranslate"><span class="pre">std::chrono::time_point::clock</span></code></p></li>
+<li><p>fix: account for different dimensions in <code class="docutils literal notranslate"><span class="pre">quantity_point_cast</span></code>’s constraint</p></li>
+<li><p>build: doxygen updated to 1.9.1</p></li>
+<li><p>build: linear_algebra updated to 0.7.1</p></li>
+</ul>
+</li>
+<li><p><strong>0.7.0 May 11, 2021</strong></p>
+<ul class="simple">
+<li><p>(!) refactor: <code class="docutils literal notranslate"><span class="pre">ScalableNumber</span></code> renamed to <code class="docutils literal notranslate"><span class="pre">Representation</span></code></p></li>
+<li><p>(!) refactor: output stream operators moved to the <code class="docutils literal notranslate"><span class="pre">units/quantity_io.h</span></code> header file</p></li>
+<li><p>(!) refactor: Refactored the library file tree</p></li>
+<li><p>(!) refactor: <code class="docutils literal notranslate"><span class="pre">quantity::count()</span></code> renamed to <code class="docutils literal notranslate"><span class="pre">quantity::number()</span></code></p></li>
+<li><p>(!) refactor: <code class="docutils literal notranslate"><span class="pre">data</span></code> system renamed to <code class="docutils literal notranslate"><span class="pre">isq::iec80000</span></code> (quantity names renamed too)</p></li>
+<li><p>(!) refactor: <code class="docutils literal notranslate"><span class="pre">*deduced_unit</span></code> renamed to <code class="docutils literal notranslate"><span class="pre">*derived_unit</span></code></p></li>
+<li><p>(!) refactor: got rid of a <code class="docutils literal notranslate"><span class="pre">noble_derived_unit</span></code></p></li>
+<li><p>refactor: quantity (kind) point updated to reflect latest changes to <code class="docutils literal notranslate"><span class="pre">quantity</span></code></p></li>
+<li><p>refactor: basic concepts, <code class="docutils literal notranslate"><span class="pre">quantity</span></code> and <code class="docutils literal notranslate"><span class="pre">quantity_cast</span></code> refactored</p></li>
+<li><p>refactor: <code class="docutils literal notranslate"><span class="pre">abs()</span></code> definition refactored to be more explicit about the return type</p></li>
+<li><p>feat: quantity (point) kind support added (thanks <a class="reference external" href="https://github.com/johelegp">&#64;johelegp</a>)</p></li>
+<li><p>feat: quantity references support added (thanks <a class="reference external" href="https://github.com/johelegp">&#64;johelegp</a>)</p></li>
+<li><p>feat: quantity aliases support addded</p></li>
+<li><p>feat: interoperability with <code class="docutils literal notranslate"><span class="pre">std::chrono::duration</span></code> and other units libraries</p></li>
+<li><p>feat: CTAD for dimensionless quantity added</p></li>
+<li><p>feat: <code class="docutils literal notranslate"><span class="pre">modulation_rate</span></code> support added (thanks <a class="reference external" href="https://github.com/go2sh">&#64;go2sh</a>)</p></li>
+<li><p>feat: SI prefixes for <code class="docutils literal notranslate"><span class="pre">isq::iec80000</span></code> support added (thanks <a class="reference external" href="https://github.com/go2sh">&#64;go2sh</a>)</p></li>
+<li><p>feat: a possibility to disable quantity UDLs support with <code class="docutils literal notranslate"><span class="pre">UNITS_NO_LITERALS</span></code> preprocessor define</p></li>
+<li><p>feat: a support to define ISQ derived dimensions in terms of different number or order of components</p></li>
+<li><p>perf: preconditions check do not influence the runtime performance of a Release build</p></li>
+<li><p>perf: <code class="docutils literal notranslate"><span class="pre">quantity_cast()</span></code> generates less assembly instructions</p></li>
+<li><p>perf: temporary string creation removed from <code class="docutils literal notranslate"><span class="pre">quantity::op&lt;&lt;()</span></code></p></li>
+<li><p>perf: value initialization for quantity value removed (left with a default initialization)</p></li>
+<li><p>perf: limited the <code class="docutils literal notranslate"><span class="pre">equivalent</span></code> trait usage</p></li>
+<li><p>perf: limited the C++ Standard Library headers usage</p></li>
+<li><p>perf: rvalue references support added for constructors and getters</p></li>
+<li><p>(!) fix: <code class="docutils literal notranslate"><span class="pre">exp()</span></code> has sense only for dimensionless quantities</p></li>
+<li><p>(!) fix: <code class="docutils literal notranslate"><span class="pre">dim_torque</span></code> now properly divides by an angle (instead of multiply) + default unit name change</p></li>
+<li><p>fix: quantity’s operators fixed to behave like the underlying types do</p></li>
+<li><p>fix: <code class="docutils literal notranslate"><span class="pre">quantity_cast()</span></code> fixed to work correctly with representation types not convertible from <code class="docutils literal notranslate"><span class="pre">std::intmax_t</span></code></p></li>
+<li><p>fix: ambiguous case for empty type list resolved</p></li>
+<li><p>fix: downcasting facility for non-default-constructible types</p></li>
+<li><p>fix: restore user-warnings within the library implementation</p></li>
+<li><p>fix: the text symbol of <code class="docutils literal notranslate"><span class="pre">foot_pound_force</span></code> and <code class="docutils literal notranslate"><span class="pre">foot_pound_force_per_second</span></code></p></li>
+<li><p>fix: quantity modulo arithmetics fixed</p></li>
+<li><p>(!) build: Conan testing version is now hosted on <a class="reference external" href="https://mpusz.jfrog.io/ui/packages/conan:%2F%2Fmp-units">Artifactory</a></p></li>
+<li><p>(!) build: Linear Algebra is now hosted on its <a class="reference external" href="https://twonington.jfrog.io/artifactory/api/conan/conan-oss">Artifactory</a></p></li>
+<li><p>(!) build: <code class="docutils literal notranslate"><span class="pre">BUILD_DOCS</span></code> CMake option renamed to <code class="docutils literal notranslate"><span class="pre">UNITS_BUILD_DOCS</span></code></p></li>
+<li><p>build: doxygen updated to 1.8.20</p></li>
+<li><p>build: catch2 updated to 2.13.4</p></li>
+<li><p>build: fmt updated to 7.1.3</p></li>
+<li><p>build: ms-gsl replaced with gsl-lite/0.38.0</p></li>
+<li><p>build: Conan generator switched to <code class="docutils literal notranslate"><span class="pre">cmake_find_package_multi</span></code></p></li>
+<li><p>build: Conan CMakeToolchain support added</p></li>
+<li><p>build: CMake scripts cleanup</p></li>
+<li><p>build: ccache support added</p></li>
+<li><p>ci: CI switched from Travis CI to GitHub Actions</p></li>
+</ul>
+</li>
+<li><p><strong>0.6.0 September 13, 2020</strong></p>
+<ul class="simple">
+<li><p>feat: <code class="docutils literal notranslate"><span class="pre">quantity_point</span></code> support added (thanks <a class="reference external" href="https://github.com/johelegp">&#64;johelegp</a>)</p></li>
+<li><p>feat: Added angle as SI base dimension (thanks <a class="reference external" href="https://github.com/kwikius">&#64;kwikius</a>)</p></li>
+<li><p>feat: <code class="docutils literal notranslate"><span class="pre">si::angular_velocity</span></code> support added (thanks <a class="reference external" href="https://github.com/mikeford3">&#64;mikeford3</a>)</p></li>
+<li><p>feat: FPS system added (thanks <a class="reference external" href="https://github.com/mikeford3">&#64;mikeford3</a>)</p></li>
+<li><p>feat: Added support for mathematical function <code class="docutils literal notranslate"><span class="pre">exp(quantity)</span></code></p></li>
+<li><p>feat: Localization support for text output added (thanks <a class="reference external" href="https://github.com/rbrugo">&#64;rbrugo</a>)</p></li>
+<li><p>feat: Added STL random number distribution wrappers (thanks <a class="reference external" href="https://github.com/yasamoka">&#64;yasamoka</a>)</p></li>
+<li><p>(!) refactor: Refactored and cleaned up the library file tree</p></li>
+<li><p>(!) refactor: <code class="docutils literal notranslate"><span class="pre">q_*</span></code> UDL renamed to <code class="docutils literal notranslate"><span class="pre">_q_*</span></code></p></li>
+<li><p>(!) refactor: UDLs with “per” in name renamed from <code class="docutils literal notranslate"><span class="pre">*p*</span></code> to <code class="docutils literal notranslate"><span class="pre">*_per_*</span></code></p></li>
+<li><p>(!) refactor: <code class="docutils literal notranslate"><span class="pre">ratio</span></code> changed to the NTTP kind</p></li>
+<li><p>(!) refactor: <code class="docutils literal notranslate"><span class="pre">exp</span></code> and <code class="docutils literal notranslate"><span class="pre">Exp</span></code> renamed to <code class="docutils literal notranslate"><span class="pre">exponent</span></code> and <code class="docutils literal notranslate"><span class="pre">Exponent</span></code></p></li>
+<li><p>(!) refactor: <code class="docutils literal notranslate"><span class="pre">Scalar</span></code> concept renamed to <code class="docutils literal notranslate"><span class="pre">ScalableNumber</span></code></p></li>
+<li><p>(!) refactor: Dimensionless quantities redesigned to be of a <code class="docutils literal notranslate"><span class="pre">quantity</span></code> type</p></li>
+<li><p>refactor: <code class="docutils literal notranslate"><span class="pre">math.h</span></code> function signatures refactored to use a <code class="docutils literal notranslate"><span class="pre">Quantity</span></code> concept (thanks <a class="reference external" href="https://github.com/kwikius">&#64;kwikius</a>)</p></li>
+<li><p>refactor: <code class="docutils literal notranslate"><span class="pre">[[nodiscard]]</span></code> added to many functions</p></li>
+<li><p>fix: <code class="docutils literal notranslate"><span class="pre">si::day</span></code> unit symbol fixed to <code class="docutils literal notranslate"><span class="pre">d</span></code> (thanks <a class="reference external" href="https://github.com/komputerwiz">&#64;komputerwiz</a>)</p></li>
+<li><p>fix: <code class="docutils literal notranslate"><span class="pre">si::mole</span></code> unit symbol fixed to <code class="docutils literal notranslate"><span class="pre">mol</span></code> (thanks <a class="reference external" href="https://github.com/mikeford3">&#64;mikeford3</a>)</p></li>
+<li><p>(!) build: gcc-9 is no longer supported (at least gcc-10 is required)</p></li>
+<li><p>build: Visual Studio 16.7 support added</p></li>
+<li><p>build: linear_algebra updated to 0.7.0/stable</p></li>
+<li><p>build: fmt updated to 7.0.3</p></li>
+<li><p>build: range-v3 updated to 0.11.0</p></li>
+<li><p>build: catch2 updated to 2.13.0</p></li>
+<li><p>build: doxygen updated to 1.8.18</p></li>
+<li><p>build: ms-gsl 3.1.0 dependency added</p></li>
+<li><p>build: Removed the dependency on a git submodule with common CMake scripts</p></li>
 </ul>
 </li>
 <li><p><strong>0.5.0 May 17, 2020</strong></p>
@@ -289,7 +365,7 @@ in drafting a new library design.</p>
 </ul>
 </li>
 </ul>
-</div>
+</section>
 
 
            </div>
@@ -298,6 +374,8 @@ in drafting a new library design.</p>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="references.html" class="btn btn-neutral float-right" title="References" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="genindex.html" class="btn btn-neutral float-left" title="Index" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

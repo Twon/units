@@ -4,15 +4,18 @@
 <html lang="en" >
 <head>
   <meta charset="utf-8">
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Quantity &mdash; mp-units 0.6.0 documentation</title>
+  <title>Quantity &mdash; mp-units 0.8.0 documentation</title>
   
 
   
   <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
 
@@ -28,18 +31,17 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
     
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Dimensions" href="dimensions.html" />
+    <link rel="next" title="Quantity Point" href="quantity_point.html" />
     <link rel="prev" title="Types" href="../types.html" /> 
 </head>
 
@@ -64,7 +66,7 @@
             
             
               <div class="version">
-                0.6.0
+                0.8.0
               </div>
             
           
@@ -93,11 +95,11 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../quick_start.html">Quick Start</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../framework.html">Framework Basics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../use_cases.html">Use Cases</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design.html">Design Deep Dive</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage.html">Installation And Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../faq.html">FAQ</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Reference:</span></p>
@@ -106,19 +108,23 @@
 <li class="toctree-l2"><a class="reference internal" href="../concepts.html">Concepts</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../types.html">Types</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Quantity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quantity_point.html">Quantity Point</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinds.html">Kinds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quantity_kind.html">Quantity Kind</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quantity_point_kind.html">Quantity Point Kind</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dimensions.html">Dimensions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="units.html">Units</a></li>
 <li class="toctree-l3"><a class="reference internal" href="prefixes.html">Prefixes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference.html">Quantity Reference</a></li>
 <li class="toctree-l3"><a class="reference internal" href="utilities.html">Utilities</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../functions.html">Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../metafunctions.html">Metafunctions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../customization_points.html">Customization Points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../downcasting.html">The Downcasting Facility</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../systems.html">Systems</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../math.html">Math</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../random.html">Random</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Appendix:</span></p>
@@ -126,6 +132,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../genindex.html">Index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../CHANGELOG.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../references.html">References</a></li>
 </ul>
 
             
@@ -195,250 +202,336 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="quantity">
+  <section id="quantity">
 <h1>Quantity<a class="headerlink" href="#quantity" title="Permalink to this headline">¶</a></h1>
 <dl class="cpp class">
-<dt id="_CPPv4I_9Dimension_6UnitOfI1DE_6ScalarEN5units8quantityE">
-<span id="_CPPv3I_9Dimension_6UnitOfI1DE_6ScalarEN5units8quantityE"></span><span id="_CPPv2I_9Dimension_6UnitOfI1DE_6ScalarEN5units8quantityE"></span>template&lt;<a class="reference internal" href="../concepts.html#_CPPv4I0EN5units9DimensionE" title="units::Dimension">Dimension</a> <code class="sig-name descname">D</code>, <a class="reference internal" href="../concepts.html#_CPPv4I00EN5units6UnitOfE" title="units::UnitOf">UnitOf</a>&lt;<a class="reference internal" href="#_CPPv4I_9Dimension_6UnitOfI1DE_6ScalarEN5units8quantityE" title="units::quantity::D">D</a>&gt; <code class="sig-name descname">U</code>, <a class="reference internal" href="../concepts.html#_CPPv4I0EN5units6ScalarE" title="units::Scalar">Scalar</a> <code class="sig-name descname">Rep</code> = double&gt;<br /><span class="target" id="classunits_1_1quantity"></span><em class="property">class </em><code class="sig-prename descclassname"><a class="reference internal" href="../../systems/physical/si/voltage.html#_CPPv45units" title="units">units</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">quantity</code><a class="headerlink" href="#_CPPv4I_9Dimension_6UnitOfI1DE_6ScalarEN5units8quantityE" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4I_9Dimension_6UnitOfI1DE_14RepresentationEN5units8quantityE">
+<span id="_CPPv3I_9Dimension_6UnitOfI1DE_14RepresentationEN5units8quantityE"></span><span id="_CPPv2I_9Dimension_6UnitOfI1DE_14RepresentationEN5units8quantityE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../concepts.html#_CPPv4I0EN5units9DimensionE" title="units::Dimension"><span class="n"><span class="pre">Dimension</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">D</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../concepts.html#_CPPv4I00EN5units6UnitOfE" title="units::UnitOf"><span class="n"><span class="pre">UnitOf</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I_9Dimension_6UnitOfI1DE_14RepresentationEN5units8quantityE" title="units::quantity::D"><span class="n"><span class="pre">D</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">U</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../concepts.html#_CPPv4I0EN5units14RepresentationE" title="units::Representation"><span class="n"><span class="pre">Representation</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Rep</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classunits_1_1quantity"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><a class="reference internal" href="../../systems/isq/si/mass.html#_CPPv45units" title="units"><span class="n"><span class="pre">units</span></span></a><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">quantity</span></span></span><a class="headerlink" href="#_CPPv4I_9Dimension_6UnitOfI1DE_14RepresentationEN5units8quantityE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>A quantity. </p>
 <p>Property of a phenomenon, body, or substance, where the property has a magnitude that can be expressed by means of a number and a measurement unit.</p>
-<p><dl class="simple">
-<dt><strong>Template Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">D</span></code>: a dimension of the quantity (can be either a BaseDimension or a DerivedDimension) </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">U</span></code>: a measurement unit of the quantity </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Rep</span></code>: a type to be used to represent values of a quantity </p></li>
-</ul>
+<p><dl class="field-list simple">
+<dt class="field-odd">tparam D</dt>
+<dd class="field-odd"><p>a dimension of the quantity (can be either a BaseDimension or a DerivedDimension) </p>
+</dd>
+<dt class="field-even">tparam U</dt>
+<dd class="field-even"><p>a measurement unit of the quantity </p>
+</dd>
+<dt class="field-odd">tparam Rep</dt>
+<dd class="field-odd"><p>a type to be used to represent values of a quantity </p>
 </dd>
 </dl>
 </p>
 <div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Public Types</p>
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
 <dl class="cpp type">
-<dt id="_CPPv4N5units8quantity9dimensionE">
-<span id="_CPPv3N5units8quantity9dimensionE"></span><span id="_CPPv2N5units8quantity9dimensionE"></span><span class="target" id="classunits_1_1quantity_1aaf7366a5ef62d34b71d98dc13ae757dd"></span><em class="property">using </em><code class="sig-name descname">dimension</code> = <a class="reference internal" href="#_CPPv4I_9Dimension_6UnitOfI1DE_6ScalarEN5units8quantityE" title="units::quantity::D">D</a><a class="headerlink" href="#_CPPv4N5units8quantity9dimensionE" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp type">
-<dt id="_CPPv4N5units8quantity4unitE">
-<span id="_CPPv3N5units8quantity4unitE"></span><span id="_CPPv2N5units8quantity4unitE"></span><span class="target" id="classunits_1_1quantity_1a6fd4a14989d2e598c9fcefb108cce883"></span><em class="property">using </em><code class="sig-name descname">unit</code> = <a class="reference internal" href="#_CPPv4I_9Dimension_6UnitOfI1DE_6ScalarEN5units8quantityE" title="units::quantity::U">U</a><a class="headerlink" href="#_CPPv4N5units8quantity4unitE" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N5units8quantity9dimensionE">
+<span id="_CPPv3N5units8quantity9dimensionE"></span><span id="_CPPv2N5units8quantity9dimensionE"></span><span class="target" id="classunits_1_1quantity_1aaf7366a5ef62d34b71d98dc13ae757dd"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dimension</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I_9Dimension_6UnitOfI1DE_14RepresentationEN5units8quantityE" title="units::quantity::D"><span class="n"><span class="pre">D</span></span></a><a class="headerlink" href="#_CPPv4N5units8quantity9dimensionE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp type">
-<dt id="_CPPv4N5units8quantity3repE">
-<span id="_CPPv3N5units8quantity3repE"></span><span id="_CPPv2N5units8quantity3repE"></span><span class="target" id="classunits_1_1quantity_1a6d0d03a149664d0e12b1bb9ba29c16d6"></span><em class="property">using </em><code class="sig-name descname">rep</code> = <a class="reference internal" href="#_CPPv4I_9Dimension_6UnitOfI1DE_6ScalarEN5units8quantityE" title="units::quantity::Rep">Rep</a><a class="headerlink" href="#_CPPv4N5units8quantity3repE" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N5units8quantity4unitE">
+<span id="_CPPv3N5units8quantity4unitE"></span><span id="_CPPv2N5units8quantity4unitE"></span><span class="target" id="classunits_1_1quantity_1a6fd4a14989d2e598c9fcefb108cce883"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">unit</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I_9Dimension_6UnitOfI1DE_14RepresentationEN5units8quantityE" title="units::quantity::U"><span class="n"><span class="pre">U</span></span></a><a class="headerlink" href="#_CPPv4N5units8quantity4unitE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N5units8quantity3repE">
+<span id="_CPPv3N5units8quantity3repE"></span><span id="_CPPv2N5units8quantity3repE"></span><span id="units::quantity::rep"></span><span class="target" id="classunits_1_1quantity_1a3e10b9267b33fdb08801481856974df7"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I_9Dimension_6UnitOfI1DE_14RepresentationEN5units8quantityE" title="units::quantity::Rep"><span class="n"><span class="pre">Rep</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rep</span></span></span><a class="headerlink" href="#_CPPv4N5units8quantity3repE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N5units8quantity3retE">
+<span id="_CPPv3N5units8quantity3retE"></span><span id="_CPPv2N5units8quantity3retE"></span><span class="target" id="classunits_1_1quantity_1a5dbd5e90a33094b194dbfbbf1380b7d4"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ret</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I_9Dimension_6UnitOfI1DE_14RepresentationEN5units8quantityE" title="units::quantity"><span class="n"><span class="pre">quantity</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I_9Dimension_6UnitOfI1DE_14RepresentationEN5units8quantityE" title="units::quantity::D"><span class="n"><span class="pre">D</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I_9Dimension_6UnitOfI1DE_14RepresentationEN5units8quantityE" title="units::quantity::U"><span class="n"><span class="pre">U</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">invoke_result_t</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">modulus</span></span><span class="p"><span class="pre">&lt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5units8quantity3repE" title="units::quantity::rep"><span class="n"><span class="pre">rep</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5units8quantity3repE" title="units::quantity::rep"><span class="n"><span class="pre">rep</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N5units8quantity3retE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </div>
 <div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
-<dt id="_CPPv4N5units8quantity8quantityEv">
-<span id="_CPPv3N5units8quantity8quantityEv"></span><span id="_CPPv2N5units8quantity8quantityEv"></span><span id="units::quantity::quantity"></span><span class="target" id="classunits_1_1quantity_1a81ec1a1d146570f73f7e9692c5a3b0cb"></span><code class="sig-name descname">quantity</code><span class="sig-paren">(</span><span class="sig-paren">)</span> = default<a class="headerlink" href="#_CPPv4N5units8quantity8quantityEv" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N5units8quantity8quantityEv">
+<span id="_CPPv3N5units8quantity8quantityEv"></span><span id="_CPPv2N5units8quantity8quantityEv"></span><span id="units::quantity::quantity"></span><span class="target" id="classunits_1_1quantity_1a81ec1a1d146570f73f7e9692c5a3b0cb"></span><span class="sig-name descname"><span class="n"><span class="pre">quantity</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N5units8quantity8quantityEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
-<dt id="_CPPv4N5units8quantity8quantityERK8quantity">
-<span id="_CPPv3N5units8quantity8quantityERK8quantity"></span><span id="_CPPv2N5units8quantity8quantityERK8quantity"></span><span id="units::quantity::quantity__quantityCR"></span><span class="target" id="classunits_1_1quantity_1a88b294a9704f54c7a945f737b99bcf89"></span><code class="sig-name descname">quantity</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N5units8quantity8quantityERK8quantity" title="units::quantity::quantity">quantity</a>&amp;<span class="sig-paren">)</span> = default<a class="headerlink" href="#_CPPv4N5units8quantity8quantityERK8quantity" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N5units8quantity8quantityERK8quantity">
+<span id="_CPPv3N5units8quantity8quantityERK8quantity"></span><span id="_CPPv2N5units8quantity8quantityERK8quantity"></span><span id="units::quantity::quantity__quantityCR"></span><span class="target" id="classunits_1_1quantity_1a88b294a9704f54c7a945f737b99bcf89"></span><span class="sig-name descname"><span class="n"><span class="pre">quantity</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5units8quantity8quantityERK8quantity" title="units::quantity::quantity"><span class="n"><span class="pre">quantity</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N5units8quantity8quantityERK8quantity" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
-<dt id="_CPPv4N5units8quantity8quantityERR8quantity">
-<span id="_CPPv3N5units8quantity8quantityERR8quantity"></span><span id="_CPPv2N5units8quantity8quantityERR8quantity"></span><span id="units::quantity::quantity__quantityRR"></span><span class="target" id="classunits_1_1quantity_1a3864a54713bfefd987a4cb1cb0d27bbe"></span><code class="sig-name descname">quantity</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N5units8quantity8quantityERR8quantity" title="units::quantity::quantity">quantity</a>&amp;&amp;<span class="sig-paren">)</span> = default<a class="headerlink" href="#_CPPv4N5units8quantity8quantityERR8quantity" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N5units8quantity8quantityERR8quantity">
+<span id="_CPPv3N5units8quantity8quantityERR8quantity"></span><span id="_CPPv2N5units8quantity8quantityERR8quantity"></span><span id="units::quantity::quantity__quantityRR"></span><span class="target" id="classunits_1_1quantity_1a3864a54713bfefd987a4cb1cb0d27bbe"></span><span class="sig-name descname"><span class="n"><span class="pre">quantity</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N5units8quantity8quantityERR8quantity" title="units::quantity::quantity"><span class="n"><span class="pre">quantity</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N5units8quantity8quantityERR8quantity" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
-<dt>
-<span class="target" id="classunits_1_1quantity_1a5cafe9c309b17a11ee390842341dc8fe"></span><code class="sig-name descname">template&lt;Scalar Value&gt; requires constexpr detail::safe_convertible&lt; Value, rep &gt; quantity (const Value &amp;v)</code></dt>
+<dt class="sig sig-object cpp">
+<span class="target" id="classunits_1_1quantity_1ac98ee29a858c8a8e3ebdf816a76ba32e"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">Value&gt;</span> <span class="pre">inline</span> <span class="pre">requires</span> <span class="pre">constexpr</span> <span class="pre">safe_convertible_to_&lt;</span> <span class="pre">std::remove_cvref_t&lt;</span> <span class="pre">Value</span> <span class="pre">&gt;,</span> <span class="pre">rep</span> <span class="pre">&gt;</span> <span class="pre">explicit</span> <span class="pre">(!(std::same_as&lt;</span> <span class="pre">dimension,</span> <span class="pre">dim_one</span> <span class="pre">&gt;</span> <span class="pre">&amp;&amp;std::same_as&lt;</span> <span class="pre">unit,</span> <span class="pre">::units::one</span> <span class="pre">&gt;))</span> <span class="pre">quantity(Value</span> <span class="pre">&amp;&amp;v)</span></span></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
-<dt>
-<span class="target" id="classunits_1_1quantity_1a6e69945abb546aa9e795a9a244e1fcdb"></span><code class="sig-name descname">template&lt;Quantity Q2&gt; requires equivalent_dim&lt; D, typename Q2::dimension &gt; &amp;&amp;detail::safe_convertible&lt; typename Q2::rep, rep &gt; &amp;&amp;constexpr detail::safe_divisible&lt; rep, typename Q2::unit, unit &gt; quantity (const Q2 &amp;q)</code></dt>
+<dt class="sig sig-object cpp">
+<span class="target" id="classunits_1_1quantity_1a3be4e35ba5ce82e6d9009ad0015bb63a"></span><span class="sig-name descname"><span class="pre">template&lt;safe_castable_to_&lt;</span> <span class="pre">quantity</span> <span class="pre">&gt;</span> <span class="pre">Q&gt;</span> <span class="pre">inline</span> <span class="pre">constexpr</span> <span class="pre">explicit</span> <span class="pre">(false)</span> <span class="pre">quantity(const</span> <span class="pre">Q</span> <span class="pre">&amp;q)</span></span></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
-<dt id="_CPPv4N5units8quantityaSERK8quantity">
-<span id="_CPPv3N5units8quantityaSERK8quantity"></span><span id="_CPPv2N5units8quantityaSERK8quantity"></span><span id="units::quantity::assign-operator__quantityCR"></span><span class="target" id="classunits_1_1quantity_1ad68c1fd148d4d8aca29ac8d820f3ae72"></span><a class="reference internal" href="#_CPPv4I_9Dimension_6UnitOfI1DE_6ScalarEN5units8quantityE" title="units::quantity">quantity</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4I_9Dimension_6UnitOfI1DE_6ScalarEN5units8quantityE" title="units::quantity">quantity</a>&amp;<span class="sig-paren">)</span> = default<a class="headerlink" href="#_CPPv4N5units8quantityaSERK8quantity" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object cpp">
+<span class="target" id="classunits_1_1quantity_1abb9fcebac34df5df0888c27904197567"></span><span class="sig-name descname"><span class="pre">template&lt;QuantityLike</span> <span class="pre">Q&gt;</span> <span class="pre">inline</span> <span class="pre">explicit</span> <span class="pre">requires</span> <span class="pre">constexpr</span> <span class="pre">safe_castable_to_&lt;</span> <span class="pre">quantity_like_type&lt;</span> <span class="pre">Q</span> <span class="pre">&gt;,</span> <span class="pre">quantity</span> <span class="pre">&gt;</span> <span class="pre">quantity</span> <span class="pre">(const</span> <span class="pre">Q</span> <span class="pre">&amp;q)</span></span></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
-<dt id="_CPPv4N5units8quantityaSERR8quantity">
-<span id="_CPPv3N5units8quantityaSERR8quantity"></span><span id="_CPPv2N5units8quantityaSERR8quantity"></span><span id="units::quantity::assign-operator__quantityRR"></span><span class="target" id="classunits_1_1quantity_1ad089d5af12db62051ee1aeb9fdc08649"></span><a class="reference internal" href="#_CPPv4I_9Dimension_6UnitOfI1DE_6ScalarEN5units8quantityE" title="units::quantity">quantity</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I_9Dimension_6UnitOfI1DE_6ScalarEN5units8quantityE" title="units::quantity">quantity</a>&amp;&amp;<span class="sig-paren">)</span> = default<a class="headerlink" href="#_CPPv4N5units8quantityaSERR8quantity" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N5units8quantityaSERK8quantity">
+<span id="_CPPv3N5units8quantityaSERK8quantity"></span><span id="_CPPv2N5units8quantityaSERK8quantity"></span><span id="units::quantity::assign-operator__quantityCR"></span><span class="target" id="classunits_1_1quantity_1ad68c1fd148d4d8aca29ac8d820f3ae72"></span><a class="reference internal" href="#_CPPv4I_9Dimension_6UnitOfI1DE_14RepresentationEN5units8quantityE" title="units::quantity"><span class="n"><span class="pre">quantity</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I_9Dimension_6UnitOfI1DE_14RepresentationEN5units8quantityE" title="units::quantity"><span class="n"><span class="pre">quantity</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N5units8quantityaSERK8quantity" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
-<dt id="_CPPv4NK5units8quantity5countEv">
-<span id="_CPPv3NK5units8quantity5countEv"></span><span id="_CPPv2NK5units8quantity5countEv"></span><span id="units::quantity::countCCE"></span><span class="target" id="classunits_1_1quantity_1ac8b4553c73dd653f481687f3ded277f2"></span><em class="property">constexpr</em> <a class="reference internal" href="#_CPPv4N5units8quantity3repE" title="units::quantity::rep">rep</a> <code class="sig-name descname">count</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4NK5units8quantity5countEv" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N5units8quantityaSERR8quantity">
+<span id="_CPPv3N5units8quantityaSERR8quantity"></span><span id="_CPPv2N5units8quantityaSERR8quantity"></span><span id="units::quantity::assign-operator__quantityRR"></span><span class="target" id="classunits_1_1quantity_1ad089d5af12db62051ee1aeb9fdc08649"></span><a class="reference internal" href="#_CPPv4I_9Dimension_6UnitOfI1DE_14RepresentationEN5units8quantityE" title="units::quantity"><span class="n"><span class="pre">quantity</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I_9Dimension_6UnitOfI1DE_14RepresentationEN5units8quantityE" title="units::quantity"><span class="n"><span class="pre">quantity</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N5units8quantityaSERR8quantity" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
-<dt id="_CPPv4NK5units8quantityplEv">
-<span id="_CPPv3NK5units8quantityplEv"></span><span id="_CPPv2NK5units8quantityplEv"></span><span id="units::quantity::add-operatorCCE"></span><span class="target" id="classunits_1_1quantity_1a614f411e422d0ff97cfbf7547872cdcd"></span><em class="property">constexpr</em> <a class="reference internal" href="#_CPPv4I_9Dimension_6UnitOfI1DE_6ScalarEN5units8quantityE" title="units::quantity">quantity</a> <code class="sig-name descname">operator+</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK5units8quantityplEv" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4NR5units8quantity6numberEv">
+<span id="_CPPv3NR5units8quantity6numberEv"></span><span id="_CPPv2NR5units8quantity6numberEv"></span><span id="units::quantity::numberRCE"></span><span class="target" id="classunits_1_1quantity_1a1d1cc60836db7ede4663d686a5d7f2a2"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5units8quantity3repE" title="units::quantity::rep"><span class="n"><span class="pre">rep</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">number</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NR5units8quantity6numberEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
-<dt id="_CPPv4I0EIQStENK5units8quantitymiE8quantityv">
-template&lt;typename <code class="sig-name descname">T</code> = <a class="reference internal" href="#_CPPv4I_9Dimension_6UnitOfI1DE_6ScalarEN5units8quantityE" title="units::quantity::Rep">Rep</a>&gt;<br /><span class="target" id="classunits_1_1quantity_1a18c3b0f981b2ac48821780ee0a51e686"></span><em class="property">constexpr</em> <a class="reference internal" href="#_CPPv4I_9Dimension_6UnitOfI1DE_6ScalarEN5units8quantityE" title="units::quantity">quantity</a> <code class="sig-name descname">operator-</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4I0EIQStENK5units8quantitymiE8quantityv" title="Permalink to this definition">¶</a><br />requires std<br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4NKR5units8quantity6numberEv">
+<span id="_CPPv3NKR5units8quantity6numberEv"></span><span id="_CPPv2NKR5units8quantity6numberEv"></span><span id="units::quantity::numberCRCE"></span><span class="target" id="classunits_1_1quantity_1ae1d431797b1ce7a4f2949dca3d875a6b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5units8quantity3repE" title="units::quantity::rep"><span class="n"><span class="pre">rep</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">number</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NKR5units8quantity6numberEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
-<dt>
-<span class="target" id="classunits_1_1quantity_1a538845824be2f09cb20128491427c857"></span><code class="sig-name descname">template&lt;typename T = Rep&gt; constexpr quantity &amp; operator++ () requires requires(T v)</code></dt>
+<dt class="sig sig-object cpp" id="_CPPv4NO5units8quantity6numberEv">
+<span id="_CPPv3NO5units8quantity6numberEv"></span><span id="_CPPv2NO5units8quantity6numberEv"></span><span id="units::quantity::numberOCE"></span><span class="target" id="classunits_1_1quantity_1ac776e7e804be9e1d78b57c74e1d3b3a6"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5units8quantity3repE" title="units::quantity::rep"><span class="n"><span class="pre">rep</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">number</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">&amp;&amp;</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NO5units8quantity6numberEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
-<dt>
-<span class="target" id="classunits_1_1quantity_1abd2b326adb08d3dd9158a36307a3d200"></span><code class="sig-name descname">template&lt;typename T = Rep&gt; requires requires (T v)</code></dt>
+<dt class="sig sig-object cpp" id="_CPPv4NKO5units8quantity6numberEv">
+<span id="_CPPv3NKO5units8quantity6numberEv"></span><span id="_CPPv2NKO5units8quantity6numberEv"></span><span id="units::quantity::numberCOCE"></span><span class="target" id="classunits_1_1quantity_1a8dbf630f430c71ac065094dfd3b3618f"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5units8quantity3repE" title="units::quantity::rep"><span class="n"><span class="pre">rep</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">number</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;&amp;</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NKO5units8quantity6numberEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
-<dt id="_CPPv4N5units8quantityppEi">
-<span id="_CPPv3N5units8quantityppEi"></span><span id="_CPPv2N5units8quantityppEi"></span><span id="units::quantity::inc-operator__iCE"></span><span class="target" id="classunits_1_1quantity_1a57b173cd4fbab3c76049b7dec694beff"></span><em class="property">constexpr</em> <a class="reference internal" href="#_CPPv4I_9Dimension_6UnitOfI1DE_6ScalarEN5units8quantityE" title="units::quantity">quantity</a> <code class="sig-name descname">operator++</code><span class="sig-paren">(</span>int<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5units8quantityppEi" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object cpp">
+<span class="target" id="classunits_1_1quantity_1aebf4cbd02d72ad71dc430facbdb79dbb"></span><span class="sig-name descname"><span class="pre">inline</span> <span class="pre">constexpr</span> <span class="pre">Quantity</span> <span class="pre">auto</span> <span class="pre">operator+</span> <span class="pre">()</span> <span class="pre">const</span> <span class="pre">requires</span> <span class="pre">requires(rep</span> <span class="pre">v)</span></span></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
-<dt>
-<span class="target" id="classunits_1_1quantity_1abd2b326adb08d3dd9158a36307a3d200"></span><code class="sig-name descname">template&lt;typename T = Rep&gt; requires requires (T v)</code></dt>
+<dt class="sig sig-object cpp">
+<span class="target" id="classunits_1_1quantity_1aae69222205038e8ccd15351222bac4f0"></span><span class="sig-name descname"><span class="pre">return</span> <span class="pre">ret</span> <span class="pre">(+number())</span></span></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
-<dt id="_CPPv4N5units8quantitymmEv">
-<span id="_CPPv3N5units8quantitymmEv"></span><span id="_CPPv2N5units8quantitymmEv"></span><span id="units::quantity::dec-operatorCE"></span><span class="target" id="classunits_1_1quantity_1aebafa55f4b5a34e93132138d30ce04b8"></span><em class="property">constexpr</em> <a class="reference internal" href="#_CPPv4I_9Dimension_6UnitOfI1DE_6ScalarEN5units8quantityE" title="units::quantity">quantity</a> &amp;<code class="sig-name descname">operator--</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5units8quantitymmEv" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object cpp">
+<span class="target" id="classunits_1_1quantity_1ade3f51580a353e14ba94036f116b7437"></span><span class="sig-name descname"><span class="pre">inline</span> <span class="pre">constexpr</span> <span class="pre">Quantity</span> <span class="pre">auto</span> <span class="pre">operator-</span> <span class="pre">()</span> <span class="pre">const</span> <span class="pre">requires</span> <span class="pre">std</span></span></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
-<dt>
-<span class="target" id="classunits_1_1quantity_1abd2b326adb08d3dd9158a36307a3d200"></span><code class="sig-name descname">template&lt;typename T = Rep&gt; requires requires (T v)</code></dt>
+<dt class="sig sig-object cpp">
+<span class="target" id="classunits_1_1quantity_1ad7de64913aec8e3ddc3a1f1e290bcf13"></span><span class="sig-name descname"><span class="pre">inline</span> <span class="pre">constexpr</span> <span class="pre">quantity</span> <span class="pre">operator++</span> <span class="pre">(int)</span> <span class="pre">requires</span> <span class="pre">requires(rep</span> <span class="pre">v)</span></span></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
-<dt id="_CPPv4N5units8quantitymmEi">
-<span id="_CPPv3N5units8quantitymmEi"></span><span id="_CPPv2N5units8quantitymmEi"></span><span id="units::quantity::dec-operator__iCE"></span><span class="target" id="classunits_1_1quantity_1a80b8d45e8af31ecac144cea625993dcd"></span><em class="property">constexpr</em> <a class="reference internal" href="#_CPPv4I_9Dimension_6UnitOfI1DE_6ScalarEN5units8quantityE" title="units::quantity">quantity</a> <code class="sig-name descname">operator--</code><span class="sig-paren">(</span>int<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5units8quantitymmEi" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object cpp">
+<span class="target" id="classunits_1_1quantity_1a23a894b16c6346b9787d1a0666c22d3a"></span><span class="sig-name descname"><span class="pre">inline</span> <span class="pre">constexpr</span> <span class="pre">quantity</span> <span class="pre">&amp;</span> <span class="pre">operator--</span> <span class="pre">()</span> <span class="pre">requires</span> <span class="pre">requires(rep</span> <span class="pre">v)</span></span></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
-<dt>
-<span class="target" id="classunits_1_1quantity_1a0d53d0ee7c311a2a9716be13afc38491"></span><code class="sig-name descname">template&lt;typename Rep2&gt; requires constexpr detail::safe_convertible&lt; Rep2, rep &gt; quantity &amp; operator+= (const quantity&lt; D, U, Rep2 &gt; &amp;q)</code></dt>
+<dt class="sig sig-object cpp">
+<span class="target" id="classunits_1_1quantity_1a3e9cbc240da710d74bb18fc4459d200d"></span><span class="sig-name descname"><span class="pre">inline</span> <span class="pre">constexpr</span> <span class="pre">quantity</span> <span class="pre">operator--</span> <span class="pre">(int)</span> <span class="pre">requires</span> <span class="pre">requires(rep</span> <span class="pre">v)</span></span></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
-<dt>
-<span class="target" id="classunits_1_1quantity_1a30c7e9e6207eef6ea12a936b2ce275f6"></span><code class="sig-name descname">template&lt;typename Rep2&gt; requires constexpr detail::safe_convertible&lt; Rep2, rep &gt; quantity &amp; operator-= (const quantity&lt; D, U, Rep2 &gt; &amp;q)</code></dt>
+<dt class="sig sig-object cpp">
+<span class="target" id="classunits_1_1quantity_1ad3d2e5c86d10e16d3c138ffd30d0fd1b"></span><span class="sig-name descname"><span class="pre">constexpr</span> <span class="pre">quantity</span> <span class="pre">&amp;</span> <span class="pre">operator+=</span> <span class="pre">(const</span> <span class="pre">quantity</span> <span class="pre">&amp;q)</span> <span class="pre">requires</span> <span class="pre">requires(rep</span> <span class="pre">a</span></span></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
-<dt>
-<span class="target" id="classunits_1_1quantity_1ac0246484f28956fa869917da5f068f94"></span><code class="sig-name descname">template&lt;typename Rep2&gt; requires constexpr detail::safe_convertible&lt; Rep2, rep &gt; quantity &amp; operator*= (const Rep2 &amp;rhs)</code></dt>
+<dt class="sig sig-object cpp">
+<span class="target" id="classunits_1_1quantity_1a9055e9cf68edccb8b663944bf1a9259b"></span><span class="sig-name descname"><span class="pre">constexpr</span> <span class="pre">quantity</span> <span class="pre">&amp;</span> <span class="pre">operator-=</span> <span class="pre">(const</span> <span class="pre">quantity</span> <span class="pre">&amp;q)</span> <span class="pre">requires</span> <span class="pre">requires(rep</span> <span class="pre">a</span></span></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
-<dt>
-<span class="target" id="classunits_1_1quantity_1a3736463d9e39f16da0fa682b3aec9f34"></span><code class="sig-name descname">template&lt;typename Rep2&gt; requires constexpr detail::safe_convertible&lt; Rep2, rep &gt; quantity &amp; operator/= (const Rep2 &amp;rhs)</code></dt>
+<dt class="sig sig-object cpp">
+<span class="target" id="classunits_1_1quantity_1ad8dd0b93021fa2faab64bf95bb45ecd0"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">Rep2&gt;</span> <span class="pre">constexpr</span> <span class="pre">quantity</span> <span class="pre">&amp;</span> <span class="pre">operator*=</span> <span class="pre">(const</span> <span class="pre">Rep2</span> <span class="pre">&amp;rhs)</span> <span class="pre">requires</span> <span class="pre">requires(rep</span> <span class="pre">a</span></span></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
-<dt>
-<span class="target" id="classunits_1_1quantity_1a74b3a92f620446a933d584d1a7ecd2ea"></span><code class="sig-name descname">template&lt;Scalar Value, typename T = Rep&gt; constexpr quantity &amp; operator%= (const Value &amp;rhs) requires(!treat_as_floating_point&lt; rep &gt;) &amp;&amp;(!treat_as_floating_point&lt; Value &gt;) &amp;&amp;requires(T v1</code></dt>
+<dt class="sig sig-object cpp">
+<span class="target" id="classunits_1_1quantity_1a5edbced3faa65a0a1550573d7bb1a588"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">Rep2&gt;</span> <span class="pre">constexpr</span> <span class="pre">quantity</span> <span class="pre">&amp;</span> <span class="pre">operator*=</span> <span class="pre">(const</span> <span class="pre">dimensionless&lt;</span> <span class="pre">units::one,</span> <span class="pre">Rep2</span> <span class="pre">&gt;</span> <span class="pre">&amp;rhs)</span> <span class="pre">requires</span> <span class="pre">requires(rep</span> <span class="pre">a</span></span></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
-<dt>
-<span class="target" id="classunits_1_1quantity_1a873b37602df42d45220ed220e3f47d8b"></span><code class="sig-name descname">template&lt;typename T = Rep&gt; constexpr quantity &amp; operator%= (const quantity &amp;q) requires(!treat_as_floating_point&lt; rep &gt;) &amp;&amp;requires(T v1</code></dt>
+<dt class="sig sig-object cpp">
+<span class="target" id="classunits_1_1quantity_1a5d65204bce30931fd76f5150e275eb5e"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">Rep2&gt;</span> <span class="pre">constexpr</span> <span class="pre">quantity</span> <span class="pre">&amp;</span> <span class="pre">operator/=</span> <span class="pre">(const</span> <span class="pre">Rep2</span> <span class="pre">&amp;rhs)</span> <span class="pre">requires</span> <span class="pre">requires(rep</span> <span class="pre">a</span></span></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
-<dt>
-<span class="target" id="classunits_1_1quantity_1a74364bd0a4bac96403d334e7358ef0b4"></span><code class="sig-name descname">return cq (lhs).count()</code></dt>
+<dt class="sig sig-object cpp">
+<span class="target" id="classunits_1_1quantity_1a4991004cbbf826d6039df6edd3f839c4"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">Rep2&gt;</span> <span class="pre">constexpr</span> <span class="pre">quantity</span> <span class="pre">&amp;</span> <span class="pre">operator/=</span> <span class="pre">(const</span> <span class="pre">dimensionless&lt;</span> <span class="pre">units::one,</span> <span class="pre">Rep2</span> <span class="pre">&gt;</span> <span class="pre">&amp;rhs)</span> <span class="pre">requires</span> <span class="pre">requires(rep</span> <span class="pre">a</span></span></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
-<dt>
-<span class="target" id="classunits_1_1quantity_1a79c5b6263118be1ef3c1563d3a24766f"></span><code class="sig-name descname">return cq (lhs).count()&lt; cq(rhs).count()</code></dt>
+<dt class="sig sig-object cpp">
+<span class="target" id="classunits_1_1quantity_1ae1702876f8ee1d322901486a07810e39"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">Rep2&gt;</span> <span class="pre">constexpr</span> <span class="pre">quantity</span> <span class="pre">&amp;</span> <span class="pre">operator%=</span> <span class="pre">(const</span> <span class="pre">Rep2</span> <span class="pre">&amp;rhs)</span> <span class="pre">requires(!floating_point_&lt;</span> <span class="pre">rep</span> <span class="pre">&gt;)</span> <span class="pre">&amp;&amp;(!floating_point_&lt;</span> <span class="pre">Rep2</span> <span class="pre">&gt;)</span> <span class="pre">&amp;&amp;requires(rep</span> <span class="pre">a</span></span></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="classunits_1_1quantity_1ad570033bd211196804f2c8c63bf5d22b"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">Rep2&gt;</span> <span class="pre">constexpr</span> <span class="pre">quantity</span> <span class="pre">&amp;</span> <span class="pre">operator%=</span> <span class="pre">(const</span> <span class="pre">dimensionless&lt;</span> <span class="pre">units::one,</span> <span class="pre">Rep2</span> <span class="pre">&gt;</span> <span class="pre">&amp;rhs)</span> <span class="pre">requires(!floating_point_&lt;</span> <span class="pre">rep</span> <span class="pre">&gt;)</span> <span class="pre">&amp;&amp;(!floating_point_&lt;</span> <span class="pre">Rep2</span> <span class="pre">&gt;)</span> <span class="pre">&amp;&amp;requires(rep</span> <span class="pre">a</span></span></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="classunits_1_1quantity_1a0230d0a6207904e0ea65eda665ee4a7e"></span><span class="sig-name descname"><span class="pre">constexpr</span> <span class="pre">quantity</span> <span class="pre">&amp;</span> <span class="pre">operator%=</span> <span class="pre">(const</span> <span class="pre">quantity</span> <span class="pre">&amp;q)</span> <span class="pre">requires(!floating_point_&lt;</span> <span class="pre">rep</span> <span class="pre">&gt;)</span> <span class="pre">&amp;&amp;requires(rep</span> <span class="pre">a</span></span></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="classunits_1_1quantity_1a796cc240570f7be8f2d18121785b10bf"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">Value&gt;</span>&#160; <span class="pre">requires</span> <span class="pre">(!Quantity&lt;</span> <span class="pre">Value</span> <span class="pre">&gt;)</span> <span class="pre">&amp;&amp;invoke_result_convertible_to_&lt;</span> <span class="pre">rep</span></span></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="classunits_1_1quantity_1a796cc240570f7be8f2d18121785b10bf"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">Value&gt;</span>&#160; <span class="pre">requires</span> <span class="pre">(!Quantity&lt;</span> <span class="pre">Value</span> <span class="pre">&gt;)</span> <span class="pre">&amp;&amp;invoke_result_convertible_to_&lt;</span> <span class="pre">rep</span></span></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="classunits_1_1quantity_1a796cc240570f7be8f2d18121785b10bf"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">Value&gt;</span>&#160; <span class="pre">requires</span> <span class="pre">(!Quantity&lt;</span> <span class="pre">Value</span> <span class="pre">&gt;)</span> <span class="pre">&amp;&amp;invoke_result_convertible_to_&lt;</span> <span class="pre">rep</span></span></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="classunits_1_1quantity_1a796cc240570f7be8f2d18121785b10bf"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">Value&gt;</span>&#160; <span class="pre">requires</span> <span class="pre">(!Quantity&lt;</span> <span class="pre">Value</span> <span class="pre">&gt;)</span> <span class="pre">&amp;&amp;invoke_result_convertible_to_&lt;</span> <span class="pre">rep</span></span></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="classunits_1_1quantity_1ac53a2c538f7bf322e794da30566fc75d"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">Value&gt;</span>&#160; <span class="pre">requires</span> <span class="pre">(!Quantity&lt;</span> <span class="pre">Value</span> <span class="pre">&gt;)</span> <span class="pre">&amp;&amp;(!floating_point_&lt;</span> <span class="pre">rep</span> <span class="pre">&gt;)</span> <span class="pre">&amp;&amp;(!floating_point_&lt;</span> <span class="pre">Value</span> <span class="pre">&gt;)</span> <span class="pre">&amp;&amp;invoke_result_convertible_to_&lt;</span> <span class="pre">rep</span></span></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="classunits_1_1quantity_1a8f3c3bf4e7f4482382ed30771656a0f9"></span><span class="sig-name descname"><span class="pre">return</span> <span class="pre">ret</span> <span class="pre">(lhs.number()</span> <span class="pre">%</span> <span class="pre">rhs.number())</span></span></dt>
 <dd></dd></dl>
 
 </div>
 <div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Public Members</p>
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
 <dl class="cpp var">
-<dt>
-<span class="target" id="classunits_1_1quantity_1a170a56517d0c5586473d0d4d79d6cce4"></span><code class="sig-name descname">return * this  {    ++value_</code></dt>
+<dt class="sig sig-object cpp">
+<span class="target" id="classunits_1_1quantity_1a170a56517d0c5586473d0d4d79d6cce4"></span><span class="sig-name descname"><span class="pre">return</span> <span class="pre">*</span> <span class="pre">this</span>&#160; <span class="pre">{++number_</span></span></dt>
 <dd></dd></dl>
 
 <dl class="cpp var">
-<dt>
-<span class="target" id="classunits_1_1quantity_1a5c17cd6d07e0b4be0ee9b6e247fcc5d5"></span><code class="sig-name descname">constexpr quantity Value v2   = { { v1 %= v2 } -&gt; SAME_AS(T&amp;)</code></dt>
+<dt class="sig sig-object cpp">
+<span class="target" id="classunits_1_1quantity_1a0b650b8d3b1618a125b73e305d37a413"></span><span class="sig-name descname"><span class="pre">constexpr</span> <span class="pre">quantity</span> <span class="pre">rep</span> <span class="pre">b</span>&#160;&#160; <span class="pre">=</span> <span class="pre">{</span> <span class="pre">{</span> <span class="pre">a</span> <span class="pre">+=</span> <span class="pre">b</span> <span class="pre">}</span> <span class="pre">-&gt;</span> <span class="pre">std::same_as&lt;rep&amp;&gt;</span></span></dt>
 <dd></dd></dl>
 
 <dl class="cpp var">
-<dt>
-<span class="target" id="classunits_1_1quantity_1a20417a07fc21ffeb7f264eac2b67838e"></span><code class="sig-name descname">constexpr quantity T v2   = { { v1 %= v2 } -&gt; SAME_AS(T&amp;)</code></dt>
+<dt class="sig sig-object cpp">
+<span class="target" id="classunits_1_1quantity_1a2f7d65e3274cf645e6b9db29d7d9f5e6"></span><span class="sig-name descname"><span class="pre">constexpr</span> <span class="pre">quantity</span> <span class="pre">const</span> <span class="pre">Rep2</span> <span class="pre">b</span>&#160;&#160; <span class="pre">=</span> <span class="pre">{</span> <span class="pre">{</span> <span class="pre">a</span> <span class="pre">*=</span> <span class="pre">b</span> <span class="pre">}</span> <span class="pre">-&gt;</span> <span class="pre">std::same_as&lt;rep&amp;&gt;</span></span></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="target" id="classunits_1_1quantity_1aefce8091a7d830576bad673758cdea52"></span><span class="sig-name descname"><span class="pre">number_</span>&#160;&#160; <span class="pre">=</span> <span class="pre">rhs</span></span></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="target" id="classunits_1_1quantity_1af03e9ee6e5d92449fb0e95ca538ff473"></span><span class="sig-name descname"><span class="pre">rep</span></span></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="target" id="classunits_1_1quantity_1a3e10b9267b33fdb08801481856974df7"></span><span class="sig-name descname"><span class="pre">constexpr</span> <span class="pre">friend</span> <span class="pre">Quantity</span> <span class="pre">auto</span> <span class="pre">rep</span>&#160; <span class="pre">{gsl_ExpectsAudit(rhs.number()</span> <span class="pre">!=quantity_values&lt;rep&gt;::zero())</span></span></dt>
 <dd></dd></dl>
 
 </div>
 <div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Public Static Functions</p>
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
 <dl class="cpp function">
-<dt>
-<span class="target" id="classunits_1_1quantity_1a3501f7e39ca33b29fd7523242397df25"></span><code class="sig-name descname">template&lt;typename T = Rep&gt; constexpr quantity zero () noexcept requires requires</code></dt>
+<dt class="sig sig-object cpp">
+<span class="target" id="classunits_1_1quantity_1a7d3e8e9cdee3f8188ac39016c297124c"></span><span class="sig-name descname"><span class="pre">static</span> <span class="pre">inline</span> <span class="pre">constexpr</span> <span class="pre">quantity</span> <span class="pre">zero</span> <span class="pre">()</span> <span class="pre">noexcept</span> <span class="pre">requires</span> <span class="pre">requires</span></span></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
-<dt>
-<span class="target" id="classunits_1_1quantity_1a2d2e1d9718def3c4b63e77c213bd0674"></span><code class="sig-name descname">template&lt;typename T = Rep&gt; constexpr quantity one () noexcept requires requires</code></dt>
+<dt class="sig sig-object cpp">
+<span class="target" id="classunits_1_1quantity_1ab8b1643a4accdcea990c8d0a50053309"></span><span class="sig-name descname"><span class="pre">static</span> <span class="pre">inline</span> <span class="pre">constexpr</span> <span class="pre">quantity</span> <span class="pre">one</span> <span class="pre">()</span> <span class="pre">noexcept</span> <span class="pre">requires</span> <span class="pre">requires</span></span></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
-<dt>
-<span class="target" id="classunits_1_1quantity_1ac9a9cd09fe2434a8b4bc4d8b66b0db5c"></span><code class="sig-name descname">template&lt;typename T = Rep&gt; constexpr quantity min () noexcept requires requires</code></dt>
+<dt class="sig sig-object cpp">
+<span class="target" id="classunits_1_1quantity_1ae4aafbfb50ef011c1c25f33ffe52227c"></span><span class="sig-name descname"><span class="pre">static</span> <span class="pre">inline</span> <span class="pre">constexpr</span> <span class="pre">quantity</span> <span class="pre">min</span> <span class="pre">()</span> <span class="pre">noexcept</span> <span class="pre">requires</span> <span class="pre">requires</span></span></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
-<dt>
-<span class="target" id="classunits_1_1quantity_1acbf01c410cf6ea8de7f1fe79875bdab0"></span><code class="sig-name descname">template&lt;typename T = Rep&gt; constexpr quantity max () noexcept requires requires</code></dt>
+<dt class="sig sig-object cpp">
+<span class="target" id="classunits_1_1quantity_1a65ea8e6da5bae0ec87fbdd164e9042e3"></span><span class="sig-name descname"><span class="pre">static</span> <span class="pre">inline</span> <span class="pre">constexpr</span> <span class="pre">quantity</span> <span class="pre">max</span> <span class="pre">()</span> <span class="pre">noexcept</span> <span class="pre">requires</span> <span class="pre">requires</span></span></dt>
 <dd></dd></dl>
 
 </div>
 <div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Friends</p>
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-attributes">Public Static Attributes</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N5units8quantity9referenceE">
+<span id="_CPPv3N5units8quantity9referenceE"></span><span id="_CPPv2N5units8quantity9referenceE"></span><span id="units::quantity::reference__units::reference:dimension.unit:"></span><span class="target" id="classunits_1_1quantity_1a0ca4cf14e04229faddcfd380ab3ba5ea"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><a class="reference internal" href="../../systems/isq/si/mass.html#_CPPv45units" title="units"><span class="n"><span class="pre">units</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="reference.html#_CPPv4I_9Dimension_6UnitOfI1DEEN5units9referenceE" title="units::reference"><span class="n"><span class="pre">reference</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N5units8quantity9dimensionE" title="units::quantity::dimension"><span class="n"><span class="pre">dimension</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5units8quantity4unitE" title="units::quantity::unit"><span class="n"><span class="pre">unit</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">reference</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N5units8quantity9referenceE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
 <dl class="cpp function">
-<dt>
-<span class="target" id="classunits_1_1quantity_1ac1cf2535cd17bd26b44ca2d10401860e"></span><code class="sig-name descname">template&lt;typename D2, typename U2, typename Rep2&gt; constexpr friend bool operator== (const quantity &amp;lhs, const quantity&lt; D2, U2, Rep2 &gt; &amp;rhs) requires equivalent_dim&lt; D</code></dt>
+<dt class="sig sig-object cpp">
+<span class="target" id="classunits_1_1quantity_1a252973f08dbc078f0977c5cd18c7045f"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">Value&gt;</span> <span class="pre">inline</span> <span class="pre">friend</span> <span class="pre">constexpr</span> <span class="pre">friend</span> <span class="pre">Quantity</span> <span class="pre">auto</span> <span class="pre">operator+</span> <span class="pre">(const</span> <span class="pre">quantity</span> <span class="pre">&amp;lhs,</span> <span class="pre">const</span> <span class="pre">Value</span> <span class="pre">&amp;rhs)</span> <span class="pre">requires</span> <span class="pre">requires</span></span></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
-<dt>
-<span class="target" id="classunits_1_1quantity_1ae67fc6602269c9d5b02e0f2f64cd851b"></span><code class="sig-name descname">template&lt;typename D2, typename U2, typename Rep2&gt; constexpr friend bool operator!= (const quantity &amp;lhs, const quantity&lt; D2, U2, Rep2 &gt; &amp;rhs) requires equivalent_dim&lt; D</code></dt>
+<dt class="sig sig-object cpp">
+<span class="target" id="classunits_1_1quantity_1a3725b2b3a7985a767162d6bf8dd74378"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">Value&gt;</span> <span class="pre">inline</span> <span class="pre">friend</span> <span class="pre">constexpr</span> <span class="pre">friend</span> <span class="pre">Quantity</span> <span class="pre">auto</span> <span class="pre">operator+</span> <span class="pre">(const</span> <span class="pre">Value</span> <span class="pre">&amp;lhs,</span> <span class="pre">const</span> <span class="pre">quantity</span> <span class="pre">&amp;rhs)</span> <span class="pre">requires</span> <span class="pre">requires</span></span></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
-<dt>
-<span class="target" id="classunits_1_1quantity_1a4483da9d514b8b69759e85f8cc6a75b0"></span><code class="sig-name descname">template&lt;typename D2, typename U2, typename Rep2&gt; constexpr friend bool operator&lt; (const quantity &amp;lhs, const quantity&lt; D2, U2, Rep2 &gt; &amp;rhs) requires equivalent_dim&lt; D</code></dt>
+<dt class="sig sig-object cpp">
+<span class="target" id="classunits_1_1quantity_1ad2a9d19183896b4d8475af41f0d84b21"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">Value&gt;</span> <span class="pre">inline</span> <span class="pre">friend</span> <span class="pre">constexpr</span> <span class="pre">friend</span> <span class="pre">Quantity</span> <span class="pre">auto</span> <span class="pre">operator-</span> <span class="pre">(const</span> <span class="pre">quantity</span> <span class="pre">&amp;lhs,</span> <span class="pre">const</span> <span class="pre">Value</span> <span class="pre">&amp;rhs)</span> <span class="pre">requires</span> <span class="pre">requires</span></span></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
-<dt>
-<span class="target" id="classunits_1_1quantity_1ad48938f815b8c655fef01c5daac2a9e9"></span><code class="sig-name descname">template&lt;typename D2, typename U2, typename Rep2&gt; constexpr friend bool operator&lt;= (const quantity &amp;lhs, const quantity&lt; D2, U2, Rep2 &gt; &amp;rhs) requires equivalent_dim&lt; D</code></dt>
+<dt class="sig sig-object cpp">
+<span class="target" id="classunits_1_1quantity_1a4e54b21b3e07533df286c3db8f44464a"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">Value&gt;</span> <span class="pre">inline</span> <span class="pre">friend</span> <span class="pre">constexpr</span> <span class="pre">friend</span> <span class="pre">Quantity</span> <span class="pre">auto</span> <span class="pre">operator-</span> <span class="pre">(const</span> <span class="pre">Value</span> <span class="pre">&amp;lhs,</span> <span class="pre">const</span> <span class="pre">quantity</span> <span class="pre">&amp;rhs)</span> <span class="pre">requires</span> <span class="pre">requires</span></span></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
-<dt>
-<span class="target" id="classunits_1_1quantity_1aa59a8fc1961f72dfcee3b7f9ec99ee78"></span><code class="sig-name descname">template&lt;typename D2, typename U2, typename Rep2&gt; constexpr friend bool operator&gt; (const quantity &amp;lhs, const quantity&lt; D2, U2, Rep2 &gt; &amp;rhs) requires equivalent_dim&lt; D</code></dt>
+<dt class="sig sig-object cpp">
+<span class="target" id="classunits_1_1quantity_1a2de5de9f4b23c85bcef8c4b7ef76c993"></span><span class="sig-name descname"><span class="pre">inline</span> <span class="pre">friend</span> <span class="pre">const</span> <span class="pre">Value</span> <span class="pre">&amp;constexpr</span> <span class="pre">friend</span> <span class="pre">Quantity</span> <span class="pre">auto</span> <span class="pre">operator*</span> <span class="pre">(const</span> <span class="pre">quantity</span> <span class="pre">&amp;q,</span> <span class="pre">const</span> <span class="pre">Value</span> <span class="pre">&amp;v)</span></span></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
-<dt>
-<span class="target" id="classunits_1_1quantity_1a09942ebace59a93e39f4c079c9b05551"></span><code class="sig-name descname">template&lt;typename D2, typename U2, typename Rep2&gt; constexpr friend bool operator&gt;= (const quantity &amp;lhs, const quantity&lt; D2, U2, Rep2 &gt; &amp;rhs) requires equivalent_dim&lt; D</code></dt>
+<dt class="sig sig-object cpp">
+<span class="target" id="classunits_1_1quantity_1a67d7d2e0f7d104e36c91ff5efcf375f2"></span><span class="sig-name descname"><span class="pre">inline</span> <span class="pre">friend</span> <span class="pre">const</span> <span class="pre">Value</span> <span class="pre">rep</span> <span class="pre">constexpr</span> <span class="pre">friend</span> <span class="pre">Quantity</span> <span class="pre">auto</span> <span class="pre">operator*</span> <span class="pre">(const</span> <span class="pre">Value</span> <span class="pre">&amp;v,</span> <span class="pre">const</span> <span class="pre">quantity</span> <span class="pre">&amp;q)</span></span></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
-<dt id="_CPPv4I00EN5units8quantitylsERNSt13basic_ostreamI5CharT6TraitsEERNSt13basic_ostreamI5CharT6TraitsEERK8quantity">
-<span id="_CPPv3I00EN5units8quantitylsERNSt13basic_ostreamI5CharT6TraitsEERK8quantity"></span><span id="_CPPv2I00EN5units8quantitylsERNSt13basic_ostreamI5CharT6TraitsEERK8quantity"></span>template&lt;class <code class="sig-name descname">CharT</code>, class <code class="sig-name descname">Traits</code>&gt;<br /><span class="target" id="classunits_1_1quantity_1a47f98e830c77f9e178ad315646363e0a"></span><em class="property">friend</em> std::basic_ostream&lt;<a class="reference internal" href="#_CPPv4I00EN5units8quantitylsERNSt13basic_ostreamI5CharT6TraitsEERNSt13basic_ostreamI5CharT6TraitsEERK8quantity" title="units::quantity::operator&lt;&lt;::CharT">CharT</a>, <a class="reference internal" href="#_CPPv4I00EN5units8quantitylsERNSt13basic_ostreamI5CharT6TraitsEERNSt13basic_ostreamI5CharT6TraitsEERK8quantity" title="units::quantity::operator&lt;&lt;::Traits">Traits</a>&gt; &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span>std::basic_ostream&lt;<a class="reference internal" href="#_CPPv4I00EN5units8quantitylsERNSt13basic_ostreamI5CharT6TraitsEERNSt13basic_ostreamI5CharT6TraitsEERK8quantity" title="units::quantity::operator&lt;&lt;::CharT">CharT</a>, <a class="reference internal" href="#_CPPv4I00EN5units8quantitylsERNSt13basic_ostreamI5CharT6TraitsEERNSt13basic_ostreamI5CharT6TraitsEERK8quantity" title="units::quantity::operator&lt;&lt;::Traits">Traits</a>&gt; &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4I_9Dimension_6UnitOfI1DE_6ScalarEN5units8quantityE" title="units::quantity">quantity</a> &amp;<em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I00EN5units8quantitylsERNSt13basic_ostreamI5CharT6TraitsEERNSt13basic_ostreamI5CharT6TraitsEERK8quantity" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object cpp">
+<span class="target" id="classunits_1_1quantity_1af2b6913ba89f790f2d92d9041b35d0d8"></span><span class="sig-name descname"><span class="pre">inline</span> <span class="pre">friend</span> <span class="pre">const</span> <span class="pre">Value</span> <span class="pre">&amp;constexpr</span> <span class="pre">friend</span> <span class="pre">Quantity</span> <span class="pre">auto</span> <span class="pre">operator/</span> <span class="pre">(const</span> <span class="pre">quantity</span> <span class="pre">&amp;q,</span> <span class="pre">const</span> <span class="pre">Value</span> <span class="pre">&amp;v)</span></span></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="classunits_1_1quantity_1a5549990010d1dd266b06cf23ac3fccd3"></span><span class="sig-name descname"><span class="pre">inline</span> <span class="pre">friend</span> <span class="pre">const</span> <span class="pre">Value</span> <span class="pre">rep</span> <span class="pre">constexpr</span> <span class="pre">friend</span> <span class="pre">Quantity</span> <span class="pre">auto</span> <span class="pre">operator/</span> <span class="pre">(const</span> <span class="pre">Value</span> <span class="pre">&amp;v,</span> <span class="pre">const</span> <span class="pre">quantity</span> <span class="pre">&amp;q)</span></span></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="classunits_1_1quantity_1a7dfbca7466e2190854f70f4b12c8d56c"></span><span class="sig-name descname"><span class="pre">inline</span> <span class="pre">friend</span> <span class="pre">const</span> <span class="pre">Value</span> <span class="pre">&amp;constexpr</span> <span class="pre">friend</span> <span class="pre">Quantity</span> <span class="pre">auto</span> <span class="pre">operator%</span> <span class="pre">(const</span> <span class="pre">quantity</span> <span class="pre">&amp;q,</span> <span class="pre">const</span> <span class="pre">Value</span> <span class="pre">&amp;v)</span></span></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="classunits_1_1quantity_1a521bb9c7ebcd734ec772d6044220f963"></span><span class="sig-name descname"><span class="pre">friend</span> <span class="pre">constexpr</span> <span class="pre">friend</span> <span class="pre">Quantity</span> <span class="pre">auto</span> <span class="pre">operator%</span> <span class="pre">(const</span> <span class="pre">quantity</span> <span class="pre">&amp;lhs,</span> <span class="pre">const</span> <span class="pre">quantity</span> <span class="pre">&amp;rhs)</span> <span class="pre">requires(!floating_point_&lt;</span> <span class="pre">rep</span> <span class="pre">&gt;)</span> <span class="pre">&amp;&amp;invoke_result_convertible_to_&lt;</span> <span class="pre">rep</span></span></dt>
 <dd></dd></dl>
 
 </div>
 </dd></dl>
 
-</div>
+</section>
 
 
            </div>
@@ -448,7 +541,7 @@ template&lt;typename <code class="sig-name descname">T</code> = <a class="refere
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="dimensions.html" class="btn btn-neutral float-right" title="Dimensions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="quantity_point.html" class="btn btn-neutral float-right" title="Quantity Point" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../types.html" class="btn btn-neutral float-left" title="Types" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

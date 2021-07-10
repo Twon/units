@@ -4,15 +4,18 @@
 <html lang="en" >
 <head>
   <meta charset="utf-8">
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Prefixes &mdash; mp-units 0.6.0 documentation</title>
+  <title>Prefixes &mdash; mp-units 0.8.0 documentation</title>
   
 
   
   <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
 
@@ -28,18 +31,17 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
     
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Utilities" href="utilities.html" />
+    <link rel="next" title="Quantity Reference" href="reference.html" />
     <link rel="prev" title="Units" href="units.html" /> 
 </head>
 
@@ -64,7 +66,7 @@
             
             
               <div class="version">
-                0.6.0
+                0.8.0
               </div>
             
           
@@ -93,11 +95,11 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../quick_start.html">Quick Start</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../framework.html">Framework Basics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../use_cases.html">Use Cases</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design.html">Design Deep Dive</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage.html">Installation And Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../faq.html">FAQ</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Reference:</span></p>
@@ -106,19 +108,23 @@
 <li class="toctree-l2"><a class="reference internal" href="../concepts.html">Concepts</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../types.html">Types</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="quantity.html">Quantity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quantity_point.html">Quantity Point</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinds.html">Kinds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quantity_kind.html">Quantity Kind</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quantity_point_kind.html">Quantity Point Kind</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dimensions.html">Dimensions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="units.html">Units</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Prefixes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference.html">Quantity Reference</a></li>
 <li class="toctree-l3"><a class="reference internal" href="utilities.html">Utilities</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../functions.html">Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../metafunctions.html">Metafunctions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../customization_points.html">Customization Points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../downcasting.html">The Downcasting Facility</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../systems.html">Systems</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../math.html">Math</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../random.html">Random</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Appendix:</span></p>
@@ -126,6 +132,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../genindex.html">Index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../CHANGELOG.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../references.html">References</a></li>
 </ul>
 
             
@@ -195,28 +202,28 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="prefixes">
+  <section id="prefixes">
 <h1>Prefixes<a class="headerlink" href="#prefixes" title="Permalink to this headline">¶</a></h1>
 <dl class="cpp struct">
-<dt id="_CPPv4N5units13prefix_familyE">
-<span id="_CPPv3N5units13prefix_familyE"></span><span id="_CPPv2N5units13prefix_familyE"></span><span id="units::prefix_family"></span><span class="target" id="structunits_1_1prefix__family"></span><em class="property">struct </em><code class="sig-name descname">prefix_family</code><a class="headerlink" href="#_CPPv4N5units13prefix_familyE" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N5units13prefix_familyE">
+<span id="_CPPv3N5units13prefix_familyE"></span><span id="_CPPv2N5units13prefix_familyE"></span><span id="units::prefix_family"></span><span class="target" id="structunits_1_1prefix__family"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">prefix_family</span></span></span><a class="headerlink" href="#_CPPv4N5units13prefix_familyE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>The base for all prefix families. </p>
 <p>Every prefix family should inherit from this type to satisfy PrefixFamily concept. </p>
-<p>Subclassed by <a class="reference internal" href="../../systems/data/prefixes.html#structunits_1_1data_1_1prefix"><span class="std std-ref">units::data::prefix</span></a>, <a class="reference internal" href="#structunits_1_1no__prefix"><span class="std std-ref">units::no_prefix</span></a>, <a class="reference internal" href="../../systems/physical/si/prefixes.html#structunits_1_1physical_1_1si_1_1prefix"><span class="std std-ref">units::physical::si::prefix</span></a></p>
+<p>Subclassed by <a class="reference internal" href="../../systems/isq/iec80000/binary_prefixes.html#structunits_1_1isq_1_1iec80000_1_1binary__prefix"><span class="std std-ref">units::isq::iec80000::binary_prefix</span></a>, <a class="reference internal" href="../../systems/isq/si/prefixes.html#structunits_1_1isq_1_1si_1_1prefix"><span class="std std-ref">units::isq::si::prefix</span></a>, <a class="reference internal" href="#structunits_1_1no__prefix"><span class="std std-ref">units::no_prefix</span></a></p>
 </dd></dl>
 
 <dl class="cpp struct">
-<dt id="_CPPv4N5units9no_prefixE">
-<span id="_CPPv3N5units9no_prefixE"></span><span id="_CPPv2N5units9no_prefixE"></span><span id="units::no_prefix"></span><span class="target" id="structunits_1_1no__prefix"></span><em class="property">struct </em><code class="sig-name descname">no_prefix</code> : <em class="property">public</em> <a class="reference internal" href="../../systems/physical/si/voltage.html#_CPPv45units" title="units">units</a>::<a class="reference internal" href="#_CPPv4N5units13prefix_familyE" title="units::prefix_family">prefix_family</a><a class="headerlink" href="#_CPPv4N5units9no_prefixE" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N5units9no_prefixE">
+<span id="_CPPv3N5units9no_prefixE"></span><span id="_CPPv2N5units9no_prefixE"></span><span id="units::no_prefix"></span><span class="target" id="structunits_1_1no__prefix"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">no_prefix</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="../../systems/isq/si/mass.html#_CPPv45units" title="units"><span class="n"><span class="pre">units</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N5units13prefix_familyE" title="units::prefix_family"><span class="n"><span class="pre">prefix_family</span></span></a><a class="headerlink" href="#_CPPv4N5units9no_prefixE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>No prefix possible for the unit. </p>
 <p>This is a special prefix type tag specifying that the unit can not be scaled with any kind of the prefix. </p>
 </dd></dl>
 
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>doxygenstruct: Cannot find class “units::prefix” in doxygen xml output for project “mp-units” from directory: /home/conan/.conan/data/mp-units/0.6.0/mpusz/testing/build/04b7affc4c0d7bd8ccd287c990c488decce77679/docs/doxygen/xml</p>
+<p>doxygenstruct: Cannot find class “units::prefix” in doxygen xml output for project “mp-units” from directory: /home/runner/work/units/units/build/docs/doxygen/xml</p>
 </div>
-</div>
+</section>
 
 
            </div>
@@ -226,7 +233,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="utilities.html" class="btn btn-neutral float-right" title="Utilities" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="reference.html" class="btn btn-neutral float-right" title="Quantity Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="units.html" class="btn btn-neutral float-left" title="Units" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
